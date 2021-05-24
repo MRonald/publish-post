@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { SearchContext } from '../contexts/PostsContext';//
 import PostItem from './PostItem';
 
 const PostListWrapper = styled.div`
@@ -8,18 +9,23 @@ const PostListWrapper = styled.div`
 `;
 
 export default function PostList() {
+    const {
+        postList
+    } = useContext(SearchContext);
+
     return (
         <PostListWrapper>
-            <PostItem />
-            {
-                // postList.map((post, index) => (
-                //     <div key={index} className="post-item">
-                //         <span className="date">{post.date}</span>
-                //         <p>{post.text}</p>
-                //         <button onClick={deletePost} className="button">apagar</button>
-                //     </div>
-                // ))
-            }
+            <ul>
+                {
+                    postList.map(
+                        (post, index) => (
+                            <li key={index}>
+                                <PostItem date={post.date} text={post.text} />
+                            </li>
+                        )
+                    )
+                }
+            </ul>
         </PostListWrapper>
     );
 }

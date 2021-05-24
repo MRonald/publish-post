@@ -28,12 +28,12 @@ const PostItemWrapper = styled.div`
     }
 `;
 
-export default function PostItem({ post }) {
+export default function PostItem({ date, text }) {
     return (
         <PostItemWrapper>
             <div>
-                <span>Data</span>
-                <span>lorem ipsum lorem ipsum</span>
+                <span>{date}</span>
+                <span>{text}</span>
             </div>
             <button>Apagar</button>
         </PostItemWrapper>
