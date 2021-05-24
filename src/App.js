@@ -1,60 +1,37 @@
-import { useState } from "react";
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+import InsertField from './components/InsertField';
+import PostList from './components/PostList';
+import PostsProvider from './contexts/PostsContext';
+
+const GlobalStyle = createGlobalStyle`
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: Ubuntu, Arial, sans-serif;
+    }
+
+    body {
+        background-color: rgba(195, 195, 195, .4);
+
+        .content {
+            margin: 15px auto;
+            width: 70%;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+            overflow: hidden;
+        }
+    }
+`;
 
 export default function App() {
-
-    const [text, setText] = useState("");
-    const [postList, setPostList] = useState([
-        { "text": "lorem ipsum dolor sit amet", "date": "moment().format('DD/MM/YYYY HH:mm')" }
-    ]);
-
-    function onChangeText(event) {
-        setText(event.target.value);
-    }
-
-    function publishPost(event) {
-        event.preventDefault();
-        const post = {
-            "text": text,
-            "date": "moment().format('DD/MM/YYYY HH:mm')"
-        }
-        console.log(postList);
-        setPostList(postList.push(post));
-        setText("");
-    }
-
-    function deletePost(event) {
-        event.preventDefault();
-    }
-
     return (
-        <div className="main-wrapper">
-            <div className="box">
-                <form className="form">
-                    <div class="field">
-                        <label for="name-1">O que está acontecendo?</label>
-                        <div class="control">
-                            <textarea value={text} name="name-1" rows="5" onChange={onChangeText} class="input" />
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="control">
-                            <button onClick={publishPost} class="button is-dark">Publicar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div className="post-list">
-                {
-                    postList.map((post, index) => (
-                        <div key={index} className="post-item">
-                            <span className="date">{post.date}</span>
-                            <p>{post.text}</p>
-                            <button onClick={deletePost} className="button">apagar</button>
-                        </div>
-                    ))
-                }
-            </div>
+        <div className="content">
+            <PostsProvider>
+                <InsertField />
+                <PostList />
+                <GlobalStyle />
+            </PostsProvider>
         </div>
     );
 }
