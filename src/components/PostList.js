@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { SearchContext } from '../contexts/PostsContext';//
+import { SearchContext } from '../contexts/PostsContext';
 import PostItem from './PostItem';
 
 const PostListWrapper = styled.div`
@@ -20,7 +20,7 @@ export default function PostList() {
                     postList.map(
                         (post, index) => (
                             <li key={index}>
-                                <PostItem date={post.date} text={post.text} />
+                                <PostItem date={post.date} text={post.text} index={index} />
                             </li>
                         )
                     )

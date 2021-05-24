@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { SearchContext } from '../contexts/PostsContext';
 
 const PostItemWrapper = styled.div`
     padding: 15px;
@@ -28,14 +29,18 @@ const PostItemWrapper = styled.div`
     }
 `;
 
-export default function PostItem({ date, text }) {
+export default function PostItem({ date, text, index }) {
+    const {
+        removePost
+    } = useContext(SearchContext);
+
     return (
         <PostItemWrapper>
             <div>
                 <span>{date}</span>
                 <span>{text}</span>
             </div>
-            <button>Apagar</button>
+            <button onClick={() => removePost(index)}>Apagar</button>
         </PostItemWrapper>
     );
 }

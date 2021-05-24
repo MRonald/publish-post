@@ -10,26 +10,29 @@ export default function PostsProvider({ children }) {
         },
         {
             "text": "lorem ipsum dolor sit amet",
-            "date": "24/05/2021 17:33"
+            "date": "24/05/2021 17:34"
         },
         {
             "text": "lorem ipsum dolor sit amet",
-            "date": "24/05/2021 17:33"
+            "date": "24/05/2021 17:35"
         }
     ]);
 
     function addPost(post) {
-        console.log(post);
-        const newList = postList;
-        newList.push(post);
-        setPostList(newList);
-        console.log(postList);
+        setPostList([].concat(postList, post));
+    }
+
+    function removePost(index) {
+        const array = postList;
+        array.splice(index, 1);
+        setPostList([].concat(array));
     }
 
     return(
         <SearchContext.Provider value={{
             postList,
-            addPost
+            addPost,
+            removePost
         }}>
             {children}
         </SearchContext.Provider>
